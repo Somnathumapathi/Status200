@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
+import 'package:status200/constants.dart';
 import 'package:status200/views/screens/login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -81,14 +82,17 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   NeoPopTiltedButton(
                     color: Color.fromRGBO(9, 121, 105, 1),
-                    onTapUp: () {},
+                    onTapUp: () => authController.registerUser(
+                        _usernamecontroller.text,
+                        _emailcontroller.text,
+                        _passwordcontroller.text),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 50.0,
                         vertical: 12,
                       ),
                       child: Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

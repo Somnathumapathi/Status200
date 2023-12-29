@@ -13,8 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Status 200',
-      theme: ThemeData.dark(
+      theme: ThemeData(
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color.fromARGB(255, 7, 246, 15),
+          brightness: Brightness.dark,
+        ),
       ),
       home: LoginScreen(),
     );

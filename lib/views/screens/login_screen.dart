@@ -4,7 +4,9 @@ import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button
 import 'package:status200/views/screens/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +38,10 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    // Image.asset(
-                    //   'assets/images/astronautpng1.png',
-                    //   height: 100,
-                    // ),
-                    // const SizedBox(height: 20),
                     TextFormField(
-                      // controller: emailC,
+                      controller: _emailcontroller,
                       decoration: InputDecoration(
-                        hintText: 'email',
+                        hintText: 'Enter e-mail',
                         hintStyle: TextStyle(
                           color: Colors.white.withAlpha(100),
                         ),
@@ -55,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
-                      // controller: passwordC,
+                      controller: _passwordcontroller,
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'password',

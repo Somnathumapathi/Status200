@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:status200/constants.dart';
 import 'package:status200/models/user_model.dart' as model;
-import 'package:status200/views/screens/home_screen.dart';
+import 'package:status200/views/screens/my_app.dart';
 import 'package:status200/views/screens/login_screen.dart';
 
 class AuthController extends GetxController {
@@ -22,8 +22,8 @@ class AuthController extends GetxController {
       print('User is null, LoginScreen.');
       Get.offAll(() => LoginScreen());
     } else {
-      print('User is not null, HomeScreen.');
-      Get.offAll(() => HomeScreen());
+      print('User is not null, MyApp.');
+      Get.offAll(() => MyApp());
     }
   }
 

@@ -18,7 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text('Welcome to home'),
           ElevatedButton(
-              onPressed: () => authController.logout(), child: Text('Logout'))
+              onPressed: () => authController.logout(), child: Text('Logout')),
+          Text('Test'),
         ],
       )),
     );

@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _screenIndex = 0;
 
-  List<String> _title = ['Home', 'Questions', 'Profile'];
+  List<String> _title = ['Home', 'Search', 'Profile'];
 
   List<Widget> _screens = [HomeScreen(), QuestionScreen(), ProfileScreen()];
   void onTapped(int index) {
@@ -37,11 +37,11 @@ class _MyAppState extends State<MyApp> {
         currentIndex: _screenIndex,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: _title[0]),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.question_answer), label: _title[1]),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: _title[1]),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: _title[2]),
         ],
         onTap: onTapped,
+        selectedItemColor: Colors.green,
       ),
     );
   }

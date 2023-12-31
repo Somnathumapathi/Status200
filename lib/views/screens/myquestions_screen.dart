@@ -5,10 +5,10 @@ class MyQuestionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second Page'),
+        title: Text('My Questions'),
       ),
       body: Center(
-        child: Text('This is the second page'),
+        child: Text('My questions'),
       ),
     );
   }

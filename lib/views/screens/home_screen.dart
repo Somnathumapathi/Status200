@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:status200/constants.dart';
+
+import 'package:status200/views/widgets/addquestiondialog.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,12 +16,12 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Welcome to home'),
-            ElevatedButton(
-                onPressed: () => authController.logout(),
-                child: Text('Logout')),
-            Text('Test'),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.dialog(AddQuestionDialog()),
+        child: Icon(Icons.add_comment),
       ),
     );
   }

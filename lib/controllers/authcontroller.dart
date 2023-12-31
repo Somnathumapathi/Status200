@@ -38,12 +38,12 @@ class AuthController extends GetxController {
             .collection('users')
             .doc(cred.user!.uid)
             .set(user.toJson());
-        Get.snackbar('Registering', '...');
+        Get.snackbar('✅', 'Registered');
       } else {
-        Get.snackbar('Error', 'Enter all the required feilds');
+        Get.snackbar('⚠️ Error', 'Enter all the required feilds');
       }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar('❌ Error', e.toString());
     }
   }
 
@@ -53,11 +53,12 @@ class AuthController extends GetxController {
         await firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
         print('Login success');
+        Get.snackbar('✅', 'Logged in');
       } else {
-        Get.snackbar('Error', 'Enter all the required feilds');
+        Get.snackbar('⚠️ Error', 'Enter all the required feilds');
       }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar('❌ Error', e.toString());
     }
   }
 

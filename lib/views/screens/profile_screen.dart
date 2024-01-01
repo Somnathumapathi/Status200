@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,9 +30,9 @@ class ProfileScreen extends StatelessWidget {
               left: 20.0, top: 5.0, right: 20.0, bottom: 10.0),
           child: Column(
             children: [
-              Row(children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 10.0, right: 30.0),
+               Row(children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 40.0),
                   child: CircleAvatar(
                     radius: 50.0,
                     backgroundColor: Color.fromARGB(129, 0, 0, 0),
@@ -42,62 +43,67 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  SizedBox(height: 30),
-                  Text(
-                    'Username',
-                    style: TextStyle(fontSize: 22),
+                  const SizedBox(height: 20.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left:13.0, right:5.0, top:5.0, bottom:5.0),
+                    child: Text(
+                      'Username',
+                      style: TextStyle(fontSize: 22),
+                    ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Email',
-                    style: TextStyle(fontSize: 22),
+                  //const SizedBox(height: 10.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left:13.0, right:5.0, top:5.0, bottom:5.0),
+                    child: Text(
+                      'Email',
+                      style: TextStyle(fontSize: 22),
+                    ),
                   ),
-                  SizedBox(height: 10),
+                  // const SizedBox(height: 10.0),
                   TextButton.icon(
-                    onPressed: () => authController.logout(),
-                    label: Text('Logout'),
-                    icon: Icon(Icons.logout),
-                  ),
-                  SizedBox(height: 30),
+                      onPressed: () => authController.logout(),
+                      label: const Text('Logout', style: TextStyle(color: Color.fromARGB(255, 34, 113, 40), fontSize: 20.0),),
+                      icon: const Icon(Icons.logout, color:Color.fromARGB(255, 34, 113, 40), size: 25.0,),
+                      ),
+                  const SizedBox(height: 10.0),
                 ])
               ]),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20.0),
               const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'MY QUESTIONS',
                   style: TextStyle(fontSize: 25),
-                  // textAlign: ,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15.0),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: ListView(
-                    itemExtent: 80.0,
-                    children: const <Widget>[
-                      ListTile(
+                    itemExtent: 70.0,
+                    children: ListTile.divideTiles(context: context, tiles: [
+                      const ListTile(
                         title: Text(
                             'State True or False “Variable declaration is implicit in Python.”'),
                         tileColor: Color.fromARGB(130, 1, 0, 0),
                       ),
-                      ListTile(
+                      const ListTile(
                         title: Text(
                             'State True or False “Variable declaration is implicit in Python."'),
                         tileColor: Color.fromARGB(130, 1, 0, 0),
                       ),
-                      ListTile(
+                      const ListTile(
                         title: Text(
                             'State True or False “Variable declaration is implicit in Python.”'),
                         tileColor: Color.fromARGB(130, 1, 0, 0),
                       ),
-                      ListTile(
+                      const ListTile(
                         title: Text(
                             'State True or False “Variable declaration is implicit in Python.”'),
                         tileColor: Color.fromARGB(130, 1, 0, 0),
                       ),
-                    ],
+                    ]).toList(),
                   ),
                 ),
               ),

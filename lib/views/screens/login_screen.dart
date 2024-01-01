@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:status200/constants.dart';
 import 'package:status200/views/screens/register_screen.dart';
-
+//Color.fromARGB(255, 10, 56, 12)
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final TextEditingController _emailcontroller = TextEditingController();
@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.amberAccent,
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
@@ -19,8 +20,8 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Card(
-              // color: Colors.black,
-              // elevation: 8.0,
+              color: Colors.black,
+              //elevation: 8.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -67,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     NeoPopTiltedButton(
-                      color: Color.fromRGBO(9, 121, 105, 1),
+                      color: Color.fromARGB(255, 10, 56, 12),
                       onTapUp: () => authController.loginUser(
                           _emailcontroller.text, _passwordcontroller.text),
                       child: const Padding(

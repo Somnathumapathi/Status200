@@ -1,9 +1,10 @@
 class Question {
   String qid;
+
   String qtitle;
   String? imageUrl;
   String qdescription;
-  QCategory category;
+  String category;
   Question(
       {required this.qid,
       required this.qtitle,
@@ -31,7 +32,7 @@ class Question {
         qid: data['qid'],
         qtitle: data['qtitle'],
         qdescription: data['qdescription'],
-        category: _parseCategory(data['category']),
+        category: data['category'],
         imageUrl: data.containsKey('imageUrl') ? data['imageUrl'] : null);
   }
   static QCategory _parseCategory(String cat) {

@@ -7,12 +7,12 @@ import 'package:status200/views/screens/login_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  late Rx<User?> _user;
+  late Rx<User?> currentuser;
   @override
   void onReady() {
-    _user = Rx<User?>(firebaseAuth.currentUser);
-    _user.bindStream(firebaseAuth.authStateChanges());
-    ever(_user, _setInitialState);
+    currentuser = Rx<User?>(firebaseAuth.currentUser);
+    currentuser.bindStream(firebaseAuth.authStateChanges());
+    ever(currentuser, _setInitialState);
     super.onReady();
   }
 

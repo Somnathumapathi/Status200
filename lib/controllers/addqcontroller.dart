@@ -11,7 +11,7 @@ class AddQuestionController extends GetxController {
   static AddQuestionController instance = Get.find();
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
-  String qcategory = '';
+  String? qcategory;
   String? imageUrl;
 
   // Future<void> pickImage() async {
@@ -49,7 +49,7 @@ class AddQuestionController extends GetxController {
           qid: cuserId,
           qtitle: title,
           qdescription: desc,
-          category: qcategory,
+          category: qcategory!,
           imageUrl: imageUrl);
       if (imageUrl != null) {
         await fireStore.collection('questions').add(question.toQIJson());

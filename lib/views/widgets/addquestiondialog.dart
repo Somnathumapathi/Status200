@@ -62,8 +62,8 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
   }
 
   Future<void> onAsk(File? file) async {
-    if (addqcontroller.titlecontroller != null &&
-        addqcontroller.desccontroller != null &&
+    if (addqcontroller.titlecontroller.text.isNotEmpty &&
+        addqcontroller.desccontroller.text.isNotEmpty &&
         addqcontroller.qcategory != null) {
       await addqcontroller.addQuestion(file);
       Navigator.pop(context);

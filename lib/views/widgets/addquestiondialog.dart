@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:neopop/neopop.dart';
 
 import '../../models/question_model.dart';
 
@@ -96,6 +97,26 @@ class AddQuestionDialog extends StatelessWidget {
                     child: Text(category.toString().split('.')[1]),
                   );
                 }).toList(),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              NeoPopTiltedButton(
+                decoration: NeoPopTiltedButtonDecoration(
+                  showShimmer: true,
+                  color: const Color.fromARGB(255, 225, 205, 23),
+                ),
+                onTapUp: () {},
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 85.0,
+                    vertical: 12,
+                  ),
+                  child: Text(
+                    'Ask',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                ),
               ),
             ],
           ),

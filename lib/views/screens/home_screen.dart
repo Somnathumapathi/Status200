@@ -19,10 +19,10 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.dialog(AddQuestionDialog()),
-        child: Icon(Icons.add_comment),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => Get.dialog(AddQuestionDialog()),
+      //   child: Icon(Icons.add_comment),
+      // ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:status200/constants.dart';
 import 'package:status200/models/question_model.dart';
 
 class QuestionController extends GetxController {
+  static QuestionController instance = Get.find();
   RxList<Question> questions = <Question>[].obs;
 
   @override
@@ -18,6 +19,12 @@ class QuestionController extends GetxController {
           await fireStore.collection('questions').get();
       questions.assignAll(
           quessnap.docs.map((doc) => Question.fromMap(doc.data())).toList());
+      // print(questions.length);
+
+      fireStore.collection('questions').snapshots().listen((event) {
+        questions.assignAll(
+            event.docs.map((doc) => Question.fromMap(doc.data())).toList());
+      });
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

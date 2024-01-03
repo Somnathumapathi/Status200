@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
               left: 20.0, top: 5.0, right: 20.0, bottom: 10.0),
           child: Column(
             children: [
-               Row(children: [
+              Row(children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 40.0),
                   child: CircleAvatar(
@@ -45,7 +45,8 @@ class ProfileScreen extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const SizedBox(height: 20.0),
                   const Padding(
-                    padding: EdgeInsets.only(left:13.0, right:5.0, top:5.0, bottom:5.0),
+                    padding: EdgeInsets.only(
+                        left: 13.0, right: 5.0, top: 5.0, bottom: 5.0),
                     child: Text(
                       'Username',
                       style: TextStyle(fontSize: 22),
@@ -53,7 +54,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   //const SizedBox(height: 10.0),
                   const Padding(
-                    padding: EdgeInsets.only(left:13.0, right:5.0, top:5.0, bottom:5.0),
+                    padding: EdgeInsets.only(
+                        left: 13.0, right: 5.0, top: 5.0, bottom: 5.0),
                     child: Text(
                       'Email',
                       style: TextStyle(fontSize: 22),
@@ -61,10 +63,19 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   // const SizedBox(height: 10.0),
                   TextButton.icon(
-                      onPressed: () => authController.logout(),
-                      label: const Text('Logout', style: TextStyle(color: Color.fromARGB(255, 34, 113, 40), fontSize: 20.0),),
-                      icon: const Icon(Icons.logout, color:Color.fromARGB(255, 34, 113, 40), size: 25.0,),
-                      ),
+                    onPressed: () => authController.logout(),
+                    label: const Text(
+                      'Logout',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 34, 113, 40),
+                          fontSize: 15.0),
+                    ),
+                    icon: const Icon(
+                      Icons.logout,
+                      color: Color.fromARGB(255, 34, 113, 40),
+                      size: 25.0,
+                    ),
+                  ),
                   const SizedBox(height: 10.0),
                 ])
               ]),

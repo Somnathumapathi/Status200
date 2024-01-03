@@ -27,7 +27,8 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
 
   Future<void> _getImage() async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
 
     if (pickedFile != null) {
       setState(() {

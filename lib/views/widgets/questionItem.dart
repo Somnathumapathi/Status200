@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class QuestionItem extends StatelessWidget {
   String qutitle;
@@ -20,35 +18,35 @@ class QuestionItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
             qutitle,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 7,
           ),
           Text(
             qudesc,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white54),
+            style: const TextStyle(color: Colors.white54),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           // Text(qucat.toUpperCase().split('.')[1])
           Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(118, 4, 81, 7),
+                color: const Color.fromARGB(118, 4, 81, 7),
                 borderRadius: BorderRadius.circular(3)),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 qucat.toUpperCase().split('.')[1],
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
             ),
           )

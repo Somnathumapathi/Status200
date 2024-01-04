@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnswerItem extends StatelessWidget {
@@ -11,34 +10,36 @@ class AnswerItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
             'Google it' * 20,
-            style: TextStyle(),
+            style: const TextStyle(),
           ),
           Row(
             children: [
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {}, icon: Icon(Icons.thumb_up_outlined)),
-                  Text('100')
+                      onPressed: () {},
+                      icon: const Icon(Icons.thumb_up_outlined)),
+                  const Text('100')
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 3,
               ),
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {}, icon: Icon(Icons.thumb_down_outlined)),
-                  Text('1')
+                      onPressed: () {},
+                      icon: const Icon(Icons.thumb_down_outlined)),
+                  const Text('1')
                 ],
               ),
-              Spacer(),
-              Text(
+              const Spacer(),
+              const Text(
                 'Helpful ? ',
                 style: TextStyle(color: Colors.white38),
               )

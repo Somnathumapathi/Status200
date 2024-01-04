@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:status200/views/widgets/answer_item.dart';
 
 class QuesDetailsScreen extends StatelessWidget {
@@ -77,17 +76,17 @@ class QuesDetailsScreen extends StatelessWidget {
                     ]),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Text(
+            const Text(
               '  Answers :',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            AnswerItem()
+            const AnswerItem()
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       //backgroundColor: Color.fromARGB(222, 19, 110, 24),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +50,7 @@ class RegisterScreen extends StatelessWidget {
                           color: Colors.white.withAlpha(100),
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -63,7 +63,7 @@ class RegisterScreen extends StatelessWidget {
                           color: Colors.white.withAlpha(100),
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -77,13 +77,13 @@ class RegisterScreen extends StatelessWidget {
                           color: Colors.white.withAlpha(100),
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 20),
                     NeoPopTiltedButton(
-                      color: Color.fromARGB(255, 10, 56, 12),
+                      color: const Color.fromARGB(255, 10, 56, 12),
                       onTapUp: () => authController.registerUser(
                           _usernamecontroller.text,
                           _emailcontroller.text,

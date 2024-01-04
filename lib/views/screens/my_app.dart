@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:status200/constants.dart';
+
 import 'package:status200/views/screens/home_screen.dart';
 import 'package:status200/views/screens/profile_screen.dart';
 import 'package:status200/views/screens/questions_screen.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -14,9 +14,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _screenIndex = 0;
 
-  List<String> _title = ['Home', 'Questions', 'Profile'];
+  final List<String> _title = ['Home', 'Questions', 'Profile'];
 
-  List<Widget> _screens = [HomeScreen(), QuestionScreen(), ProfileScreen()];
+  final List<Widget> _screens = [
+    HomeScreen(),
+    QuestionScreen(),
+    ProfileScreen()
+  ];
   void onTapped(int index) {
     setState(() {
       _screenIndex = index;

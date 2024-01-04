@@ -5,9 +5,9 @@ class MyQuestionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Questions'),
+        title: const Text('My Questions'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('My questions'),
       ),
     );

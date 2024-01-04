@@ -1,17 +1,16 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neopop/neopop.dart';
-import 'package:status200/constants.dart';
+
 import 'package:status200/controllers/addqcontroller.dart';
 
 import '../../models/question_model.dart';
 
 class AddQuestionDialog extends StatefulWidget {
-  AddQuestionDialog({super.key});
+  const AddQuestionDialog({super.key});
 
   @override
   State<AddQuestionDialog> createState() => _AddQuestionDialogState();

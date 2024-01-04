@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:status200/constants.dart';
 import 'package:status200/views/screens/register_screen.dart';
+
 //Color.fromARGB(255, 10, 56, 12)
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       //backgroundColor: Colors.amberAccent,
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.white.withAlpha(100),
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -62,13 +63,13 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.white.withAlpha(100),
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 20),
                     NeoPopTiltedButton(
-                      color: Color.fromARGB(255, 10, 56, 12),
+                      color: const Color.fromARGB(255, 10, 56, 12),
                       onTapUp: () => authController.loginUser(
                           _emailcontroller.text, _passwordcontroller.text),
                       child: const Padding(

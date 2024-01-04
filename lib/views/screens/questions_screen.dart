@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status200/constants.dart';
 import 'package:status200/controllers/questioncontroller.dart';
+import 'package:status200/views/screens/quesdetails_screen.dart';
 import 'package:status200/views/widgets/addquestiondialog.dart';
 import 'package:status200/views/widgets/questionItem.dart';
 
@@ -37,10 +38,20 @@ class QuestionScreen extends StatelessWidget {
                       itemCount: questionController.questions.length - 1,
                       itemBuilder: (context, i) {
                         final _question = questionController.questions[i];
-                        return QuestionItem(
-                          qucat: _question.category,
-                          qutitle: _question.qtitle,
-                          qudesc: _question.qdescription,
+                        return InkWell(
+                          onTap: () {
+                            Get.to(QuesDetailsScreen(
+                              qdtitle: _question.qtitle,
+                              qddesc: _question.qdescription,
+                              qdcat: _question.category,
+                              qdImage: _question.imageUrl,
+                            ));
+                          },
+                          child: QuestionItem(
+                            qucat: _question.category,
+                            qutitle: _question.qtitle,
+                            qudesc: _question.qdescription,
+                          ),
                         );
                       },
                     )

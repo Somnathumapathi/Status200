@@ -39,9 +39,9 @@ class QuestionScreen extends StatelessWidget {
           ),
           Expanded(
             child: Obx(
-              () => (questionController.searchResults.length - 1) > 0
+              () => (questionController.searchResults.isNotEmpty)
                   ? ListView.builder(
-                      itemCount: questionController.searchResults.length - 1,
+                      itemCount: questionController.searchResults.length,
                       itemBuilder: (context, i) {
                         final _question = questionController.searchResults[i];
                         return InkWell(
@@ -51,6 +51,8 @@ class QuestionScreen extends StatelessWidget {
                               qddesc: _question.qdescription,
                               qdcat: _question.category,
                               qdImage: _question.imageUrl,
+                              qdqid: _question.qid!,
+                              qduid: _question.uid,
                             ));
                           },
                           child: QuestionItem(

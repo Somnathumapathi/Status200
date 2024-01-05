@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:status200/views/widgets/account_widget.dart';
+import 'package:status200/views/widgets/addanswerdialog.dart';
 
 import 'package:status200/views/widgets/answer_item.dart';
 
@@ -8,11 +11,15 @@ class QuesDetailsScreen extends StatelessWidget {
       required this.qdtitle,
       required this.qddesc,
       required this.qdcat,
+      required this.qdqid,
+      required this.qduid,
       this.qdImage});
   String qdtitle;
   String qddesc;
   String qdcat;
   String? qdImage;
+  String qdqid;
+  String qduid;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +79,11 @@ class QuesDetailsScreen extends StatelessWidget {
                             style: const TextStyle(fontSize: 12),
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      AccountWidget()
                     ]),
               ),
             ),
@@ -86,9 +97,15 @@ class QuesDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const AnswerItem()
+            const AnswerItem(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.dialog(AddAnswerDialog(
+          qid: qdqid,
+        )),
+        child: Icon(Icons.add_comment),
       ),
     );
   }

@@ -1,18 +1,20 @@
 class Question {
-  String qid;
-
+  String uid;
+  String? qid;
   String qtitle;
   String? imageUrl;
   String qdescription;
   String category;
   Question(
-      {required this.qid,
+      {required this.uid,
+      this.qid,
       required this.qtitle,
       required this.qdescription,
       required this.category,
       this.imageUrl});
 
-  Map<String, dynamic> toQIJson() => {
+  Map<String, dynamic> toQJson() => {
+        'uid': uid,
         'qid': qid,
         'qtitle': qtitle,
         'imageUrl': imageUrl,
@@ -20,15 +22,9 @@ class Question {
         'category': category.toString()
       };
 
-  Map<String, dynamic> toQJson() => {
-        'qid': qid,
-        'qtitle': qtitle,
-        'qdescription': qdescription,
-        'category': category.toString()
-      };
-
   factory Question.fromMap(Map<String, dynamic> data) {
     return Question(
+        uid: data['uid'],
         qid: data['qid'],
         qtitle: data['qtitle'],
         qdescription: data['qdescription'],

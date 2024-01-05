@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:status200/constants.dart';
+import 'package:status200/controllers/answercontroller.dart';
 import 'package:status200/views/widgets/account_widget.dart';
 import 'package:status200/views/widgets/addanswerdialog.dart';
 
@@ -20,9 +22,11 @@ class QuesDetailsScreen extends StatelessWidget {
   String? qdImage;
   String qdqid;
   String qduid;
+  final AnswerController answerController = Get.put(AnswerController());
 
   @override
   Widget build(BuildContext context) {
+    answerController.getQuesAnswer(qdqid);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Question Details'),
@@ -83,7 +87,9 @@ class QuesDetailsScreen extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      AccountWidget()
+                      AccountWidget(
+                        userid: qduid,
+                      )
                     ]),
               ),
             ),
@@ -97,14 +103,34 @@ class QuesDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const AnswerItem(),
+            Obx(() => answerController.quesAnswer.isNotEmpty
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: answerController.quesAnswer.length,
+                    itemBuilder: (context, i) {
+                      var ans = answerController.quesAnswer[i];
+
+                      return AnswerItem(
+                        answer: ans.answer,
+                        upvotes: ans.upvotes,
+                        downvotes: ans.downvotes,
+                        userid: ans.uid,
+                      );
+                    },
+                  )
+                : Text('No Answers Yet')),
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.dialog(AddAnswerDialog(
-          qid: qdqid,
-        )),
+        onPressed: () async {
+          await Get.dialog(AddAnswerDialog(qid: qdqid));
+
+          answerController.getQuesAnswer(qdqid);
+        },
         child: Icon(Icons.add_comment),
       ),
     );

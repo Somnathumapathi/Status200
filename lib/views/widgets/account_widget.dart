@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccountWidget extends StatelessWidget {
-  const AccountWidget({super.key});
+  AccountWidget({super.key, required this.userid});
+  String userid;
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +11,17 @@ class AccountWidget extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 15,
+          backgroundColor: Color.fromARGB(255, 4, 29, 1),
           child: Text(
             'S',
             style: TextStyle(color: Colors.green, fontSize: 17),
           ),
-          backgroundColor: Color.fromARGB(255, 4, 29, 1),
         ),
         SizedBox(
           width: 5,
         ),
         Text(
-          'Username',
+          userid,
           style: TextStyle(
               color: Colors.white54, decoration: TextDecoration.underline),
         )

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,16 +47,17 @@ class AddQuestionController extends GetxController {
       }
       final cuserId = firebaseAuth.currentUser!.uid;
       Question question = Question(
-          qid: cuserId,
+          uid: cuserId,
           qtitle: title,
           qdescription: desc,
           category: qcategory!,
+          qid: null,
           imageUrl: imageUrl);
-      if (imageUrl != null) {
-        await fireStore.collection('questions').add(question.toQIJson());
-      } else {
-        await fireStore.collection('questions').add(question.toQJson());
-      }
+
+      DocumentReference docRef =
+          await fireStore.collection('questions').add(question.toQJson());
+      await docRef.update({'qid': docRef.id});
+      print(docRef.id);
       Get.snackbar('Successfully', 'Asked Question');
     } catch (e) {
       Get.snackbar('Error', e.toString());

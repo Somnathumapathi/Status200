@@ -68,7 +68,7 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
       await addqcontroller.addQuestion(file);
       Navigator.pop(context);
     } else {
-      Get.snackbar('Error', 'Fill all the *required fields');
+      Get.snackbar('⚠️', 'Fill all the *required fields');
     }
   }
 
@@ -76,7 +76,7 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: AlertDialog(
-        title: Text('Ask your doubt'),
+        title: const Text('Ask your doubt'),
         content: Column(children: [
           const Text('Add Image:'),
           const SizedBox(
@@ -122,7 +122,7 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
             ),
             controller: addqcontroller.desccontroller,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           // InkWell(
@@ -141,7 +141,8 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
               InkWell(
                 onTap: () => _showCategorySelection(context),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(4),
@@ -152,27 +153,27 @@ class _AddQuestionDialogState extends State<AddQuestionDialog> {
                       Text(
                         selectedCategory?.toString().split('.')[1] ??
                             '*Select Category',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
-                      Icon(Icons.arrow_drop_down),
+                      const Icon(Icons.arrow_drop_down),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               NeoPopTiltedButton(
-                decoration: NeoPopTiltedButtonDecoration(
+                decoration: const NeoPopTiltedButtonDecoration(
                   showShimmer: true,
-                  color: const Color.fromARGB(255, 225, 205, 23),
+                  color: Color.fromARGB(255, 225, 205, 23),
                 ),
                 onTapUp: () {
                   onAsk(_image);
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 90.0,
+                    horizontal: 100.0,
                     vertical: 12,
                   ),
                   child: Text(

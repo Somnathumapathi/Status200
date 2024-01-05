@@ -29,7 +29,8 @@ class QuestionController extends GetxController {
       fireStore.collection('questions').snapshots().listen((event) {
         questions.assignAll(
             event.docs.map((doc) => Question.fromMap(doc.data())).toList());
-        searchResults();
+        searchResults.assignAll(questions);
+        // searchResults();
       });
     } catch (e) {
       Get.snackbar("Error", e.toString());

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status200/constants.dart';
+import 'package:status200/controllers/answercontroller.dart';
 
 import '../models/answer_model.dart';
 
 class AddAnsController extends GetxController {
   static AddAnsController instance = Get.find();
+  final AnswerController answercontroller = Get.put(AnswerController());
   TextEditingController anscontroller = TextEditingController();
   int _upvotes = 0;
   int _downvotes = 0;
@@ -22,6 +24,7 @@ class AddAnsController extends GetxController {
           upvotes: _upvotes,
           downvotes: _downvotes);
       await fireStore.collection('answers').add(answer.toAJSON());
+      answercontroller.fetchAnswers();
       Get.snackbar('Successfully', 'Answered Question');
     } catch (e) {
       Get.snackbar('Error', e.toString());

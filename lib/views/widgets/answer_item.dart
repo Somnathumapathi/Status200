@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:status200/views/widgets/account_widget.dart';
 
 class AnswerItem extends StatelessWidget {
-  const AnswerItem({super.key});
+  AnswerItem(
+      {super.key,
+      required this.answer,
+      required this.upvotes,
+      required this.downvotes,
+      required this.userid});
+  String answer;
+  int upvotes;
+  int downvotes;
+  String userid;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +24,7 @@ class AnswerItem extends StatelessWidget {
             height: 5,
           ),
           Text(
-            'Google it' * 20,
+            answer,
             style: const TextStyle(),
           ),
           Row(
@@ -24,7 +34,7 @@ class AnswerItem extends StatelessWidget {
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.thumb_up_outlined)),
-                  const Text('100')
+                  Text(upvotes.toString())
                 ],
               ),
               const SizedBox(
@@ -35,7 +45,7 @@ class AnswerItem extends StatelessWidget {
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.thumb_down_outlined)),
-                  const Text('1')
+                  Text(downvotes.toString())
                 ],
               ),
               const Spacer(),
@@ -44,7 +54,8 @@ class AnswerItem extends StatelessWidget {
                 style: TextStyle(color: Colors.white38),
               )
             ],
-          )
+          ),
+          AccountWidget(userid: userid)
         ]),
       ),
     );

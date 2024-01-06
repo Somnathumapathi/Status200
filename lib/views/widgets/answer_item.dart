@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:status200/constants.dart';
+import 'package:status200/controllers/answercontroller.dart';
 import 'package:status200/views/widgets/account_widget.dart';
 
 import '../../controllers/accountitemcontroller.dart';
@@ -6,16 +8,20 @@ import '../../controllers/accountitemcontroller.dart';
 class AnswerItem extends StatelessWidget {
   AnswerItem(
       {super.key,
+      required this.aid,
       required this.answer,
       required this.upvotes,
       required this.downvotes,
       required this.userid,
-      required this.accountItemController});
+      required this.accountItemController,
+      required this.answerController});
+  String aid;
   String answer;
   int upvotes;
   int downvotes;
   String userid;
   final AccountItemController accountItemController;
+  final AnswerController answerController;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +42,20 @@ class AnswerItem extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.thumb_up_outlined)),
+                      onPressed: () {
+                        answerController.decUpVote(
+                            aid, firebaseAuth.currentUser!.uid);
+
+                        answerController.unDownVote(
+                            aid, firebaseAuth.currentUser!.uid);
+                      },
+                      icon: answerController.isUpVoted(
+                              aid, firebaseAuth.currentUser!.uid)
+                          ? const Icon(
+                              Icons.thumb_up_off_alt_sharp,
+                              color: Colors.green,
+                            )
+                          : const Icon(Icons.thumb_up_off_alt_outlined)),
                   Text(upvotes.toString())
                 ],
               ),
@@ -47,8 +65,20 @@ class AnswerItem extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.thumb_down_outlined)),
+                      onPressed: () {
+                        answerController.decDownVote(
+                            aid, firebaseAuth.currentUser!.uid);
+
+                        answerController.unUpvote(
+                            aid, firebaseAuth.currentUser!.uid);
+                      },
+                      icon: answerController.isDownVoted(
+                              aid, firebaseAuth.currentUser!.uid)
+                          ? const Icon(
+                              Icons.thumb_down_alt_sharp,
+                              color: Colors.green,
+                            )
+                          : const Icon(Icons.thumb_down_off_alt_outlined)),
                   Text(downvotes.toString())
                 ],
               ),

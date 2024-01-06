@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:status200/constants.dart';
 import 'package:status200/models/answer_model.dart';
 
@@ -8,7 +9,7 @@ class AnswerController extends GetxController {
   RxList<Answer> answers = <Answer>[].obs;
   RxList<Answer> quesAnswer = <Answer>[].obs;
   // RxString qid = ''.obs;
-
+  final box = GetStorage();
   @override
   void onInit() {
     fetchAnswers();
@@ -32,5 +33,92 @@ class AnswerController extends GetxController {
 
   Future<void> getQuesAnswer(String qid) async {
     quesAnswer.assignAll(answers.where((ans) => ans.qid == qid));
+  }
+
+  bool isUpVoted(String aid, String uid) {
+    return box.read('upVoted_${aid}_$uid') == true;
+  }
+
+  Future<void> decUpVote(String aid, uid) async {
+    isUpVoted(aid, uid) ? await unUpvote(aid, uid) : await onUpvote(aid, uid);
+    update();
+  }
+
+  Future<void> onUpvote(String aid, uid) async {
+    try {
+      final doc = await fireStore.collection('answers').doc(aid).get();
+
+      final Answer answer = Answer.fromMap(doc.data()!);
+      answer.upvotes++;
+      await fireStore
+          .collection('answers')
+          .doc(aid)
+          .update({'upvotes': answer.upvotes});
+      box.write('upVoted_${aid}_$uid', true);
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  Future<void> unUpvote(String aid, uid) async {
+    try {
+      final doc = await fireStore.collection('answers').doc(aid).get();
+
+      final Answer answer = Answer.fromMap(doc.data()!);
+      if (answer.upvotes > 0 && firebaseAuth.currentUser!.uid == uid) {
+        answer.upvotes--;
+
+        await fireStore
+            .collection('answers')
+            .doc(aid)
+            .update({'upvotes': answer.upvotes});
+      }
+      box.write('upVoted_${aid}_$uid', false);
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  bool isDownVoted(String aid, uid) {
+    return box.read('downVoted_${aid}_$uid') == true;
+  }
+
+  Future<void> decDownVote(String aid, uid) async {
+    isDownVoted(aid, uid)
+        ? await unDownVote(aid, uid)
+        : await onDownVote(aid, uid);
+    update();
+  }
+
+  Future<void> onDownVote(String aid, uid) async {
+    try {
+      final doc = await fireStore.collection('answers').doc(aid).get();
+      final Answer answer = Answer.fromMap(doc.data()!);
+      answer.downvotes++;
+      await fireStore
+          .collection('answers')
+          .doc(aid)
+          .update({'downvotes': answer.downvotes});
+      box.write('downVoted_${aid}_$uid', true);
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  Future<void> unDownVote(String aid, uid) async {
+    try {
+      final doc = await fireStore.collection('answers').doc(aid).get();
+      final Answer answer = Answer.fromMap(doc.data()!);
+      if (answer.downvotes > 0 && firebaseAuth.currentUser!.uid == uid) {
+        answer.downvotes--;
+        await fireStore
+            .collection('answers')
+            .doc(aid)
+            .update({'downvotes': answer.downvotes});
+      }
+      box.write('downVoted_${aid}_$uid', false);
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
   }
 }

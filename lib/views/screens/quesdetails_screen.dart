@@ -48,7 +48,7 @@ class QuesDetailsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${qdtitle} :',
+                                '$qdtitle :',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -122,11 +122,13 @@ class QuesDetailsScreen extends StatelessWidget {
                               var ans = answerController.quesAnswer[i];
 
                               return AnswerItem(
+                                aid: ans.aid!,
                                 answer: ans.answer,
                                 upvotes: ans.upvotes,
                                 downvotes: ans.downvotes,
                                 userid: ans.uid,
                                 accountItemController: AccountItemController(),
+                                answerController: answerController,
                               );
                             },
                           )

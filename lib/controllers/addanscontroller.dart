@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status200/constants.dart';
@@ -23,7 +24,10 @@ class AddAnsController extends GetxController {
           answer: ans,
           upvotes: _upvotes,
           downvotes: _downvotes);
-      await fireStore.collection('answers').add(answer.toAJSON());
+      DocumentReference docRef =
+          await fireStore.collection('answers').add(answer.toAJSON());
+      await docRef.update({'aid': docRef.id});
+      print(docRef.id);
       answercontroller.fetchAnswers();
       Get.snackbar('Successfully', 'Answered Question');
     } catch (e) {

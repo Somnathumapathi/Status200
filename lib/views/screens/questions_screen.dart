@@ -13,65 +13,76 @@ class QuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              onChanged: (value) => questionController.setSearchQuery(value),
-              decoration: InputDecoration(
-                hintText: 'Search',
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      _searchController.clear();
-                      questionController.clearSearch();
-                    },
-                    icon: const Icon(Icons.cancel_outlined)),
-                prefixIcon: const Icon(Icons.search),
-                //
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+    return FutureBuilder(
+        future: questionController.fetchQuestions(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Scaffold(
+              body: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (value) =>
+                          questionController.setSearchQuery(value),
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              _searchController.clear();
+                              questionController.clearSearch();
+                            },
+                            icon: const Icon(Icons.cancel_outlined)),
+                        prefixIcon: const Icon(Icons.search),
+                        //
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Obx(
+                      () => (questionController.searchResults.isNotEmpty)
+                          ? ListView.builder(
+                              itemCount:
+                                  questionController.searchResults.length,
+                              itemBuilder: (context, i) {
+                                final _question =
+                                    questionController.searchResults[i];
+                                return InkWell(
+                                  onTap: () {
+                                    Get.to(() => QuesDetailsScreen(
+                                          qdtitle: _question.qtitle,
+                                          qddesc: _question.qdescription,
+                                          qdcat: _question.category,
+                                          qdImage: _question.imageUrl,
+                                          qdqid: _question.qid!,
+                                          qduid: _question.uid,
+                                        ));
+                                  },
+                                  child: QuestionItem(
+                                    qucat: _question.category,
+                                    qutitle: _question.qtitle,
+                                    qudesc: _question.qdescription,
+                                  ),
+                                );
+                              },
+                            )
+                          : const Center(child: Text('Nothing to display')),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-          Expanded(
-            child: Obx(
-              () => (questionController.searchResults.isNotEmpty)
-                  ? ListView.builder(
-                      itemCount: questionController.searchResults.length,
-                      itemBuilder: (context, i) {
-                        final _question = questionController.searchResults[i];
-                        return InkWell(
-                          onTap: () {
-                            Get.to(QuesDetailsScreen(
-                              qdtitle: _question.qtitle,
-                              qddesc: _question.qdescription,
-                              qdcat: _question.category,
-                              qdImage: _question.imageUrl,
-                              qdqid: _question.qid!,
-                              qduid: _question.uid,
-                            ));
-                          },
-                          child: QuestionItem(
-                            qucat: _question.category,
-                            qutitle: _question.qtitle,
-                            qudesc: _question.qdescription,
-                          ),
-                        );
-                      },
-                    )
-                  : const Center(child: Text('Nothing to display')),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.dialog(AddQuestionDialog()),
-        child: const Icon(Icons.add_comment),
-      ),
-    );
+              floatingActionButton: FloatingActionButton(
+                onPressed: () => Get.dialog(AddQuestionDialog()),
+                child: const Icon(Icons.add_comment),
+              ),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }

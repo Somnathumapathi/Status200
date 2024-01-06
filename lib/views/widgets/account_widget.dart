@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:status200/controllers/accountitemcontroller.dart';
 
 class AccountWidget extends StatelessWidget {
-  AccountWidget({super.key, required this.userid});
+  AccountWidget(
+      {super.key, required this.userid, required this.accountItemController});
   String userid;
-  final AccountItemController accountItemController =
-      Get.put(AccountItemController());
+  final AccountItemController accountItemController;
 
   @override
   Widget build(BuildContext context) {

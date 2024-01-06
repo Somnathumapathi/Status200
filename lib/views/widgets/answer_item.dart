@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:status200/views/widgets/account_widget.dart';
 
+import '../../controllers/accountitemcontroller.dart';
+
 class AnswerItem extends StatelessWidget {
   AnswerItem(
       {super.key,
       required this.answer,
       required this.upvotes,
       required this.downvotes,
-      required this.userid});
+      required this.userid,
+      required this.accountItemController});
   String answer;
   int upvotes;
   int downvotes;
   String userid;
+  final AccountItemController accountItemController;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,10 @@ class AnswerItem extends StatelessWidget {
               )
             ],
           ),
-          AccountWidget(userid: userid)
+          AccountWidget(
+            userid: userid,
+            accountItemController: accountItemController,
+          )
         ]),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status200/constants.dart';
+import 'package:status200/controllers/accountitemcontroller.dart';
 import 'package:status200/controllers/answercontroller.dart';
 import 'package:status200/views/widgets/account_widget.dart';
 import 'package:status200/views/widgets/addanswerdialog.dart';
@@ -47,7 +48,7 @@ class QuesDetailsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${qdtitle}' + ' :',
+                                '${qdtitle} :',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -68,10 +69,13 @@ class QuesDetailsScreen extends StatelessWidget {
                                   : const SizedBox(
                                       height: 1,
                                     ),
-                              const Text('Description:'),
+                              const Text(
+                                'Description:',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
                               Text(
                                 qddesc,
-                                style: const TextStyle(color: Colors.white54),
+                                style: const TextStyle(color: Colors.white60),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -94,6 +98,7 @@ class QuesDetailsScreen extends StatelessWidget {
                               ),
                               AccountWidget(
                                 userid: qduid,
+                                accountItemController: AccountItemController(),
                               )
                             ]),
                       ),
@@ -121,6 +126,7 @@ class QuesDetailsScreen extends StatelessWidget {
                                 upvotes: ans.upvotes,
                                 downvotes: ans.downvotes,
                                 userid: ans.uid,
+                                accountItemController: AccountItemController(),
                               );
                             },
                           )

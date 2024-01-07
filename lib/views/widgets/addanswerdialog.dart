@@ -12,6 +12,7 @@ class AddAnswerDialog extends StatelessWidget {
   Future<void> _onAnswer(String qid, BuildContext context) async {
     if (addAnsController.anscontroller.text.isNotEmpty) {
       await addAnsController.addAnswer(qid);
+      addAnsController.anscontroller.clear();
       Navigator.pop(context);
     } else {
       Get.snackbar('⚠️', 'Don\'t give blank answer');

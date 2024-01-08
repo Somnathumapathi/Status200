@@ -6,6 +6,8 @@ import 'package:status200/views/screens/quesdetails_screen.dart';
 import 'package:status200/views/widgets/addquestiondialog.dart';
 import 'package:status200/views/widgets/questionItem.dart';
 
+import '../../controllers/answercontroller.dart';
+
 class QuestionScreen extends StatelessWidget {
   QuestionScreen({super.key});
   final QuestionController questionController = Get.put(QuestionController());
@@ -52,7 +54,10 @@ class QuestionScreen extends StatelessWidget {
                                 final _question =
                                     questionController.searchResults[i];
                                 return InkWell(
-                                  onTap: () {
+                                  onTap: () async {
+                                    final AnswerController answerController =
+                                        Get.put(AnswerController());
+                                    await answerController.fetchAnswers();
                                     Get.to(() => QuesDetailsScreen(
                                           qdtitle: _question.qtitle,
                                           qddesc: _question.qdescription,

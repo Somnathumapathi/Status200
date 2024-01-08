@@ -8,14 +8,15 @@ class AnswerController extends GetxController {
   static AnswerController instance = Get.find();
   RxList<Answer> answers = <Answer>[].obs;
   RxList<Answer> quesAnswer = <Answer>[].obs;
+
   // RxString qid = ''.obs;
   final box = GetStorage();
-  @override
-  void onInit() {
-    fetchAnswers();
+  // @override
+  // void onInit() {
+  //   // fetchAnswers();
 
-    super.onInit();
-  }
+  //   super.onInit();
+  // }
 
   Future<void> fetchAnswers() async {
     try {
@@ -39,12 +40,14 @@ class AnswerController extends GetxController {
     return box.read('upVoted_${aid}_$uid') == true;
   }
 
-  Future<void> decUpVote(String aid, uid) async {
-    isUpVoted(aid, uid) ? await unUpvote(aid, uid) : await onUpvote(aid, uid);
+  Future<void> decUpVote(String aid, uid, qid) async {
+    isUpVoted(aid, uid)
+        ? await unUpvote(aid, uid, qid)
+        : await onUpvote(aid, uid, qid);
     update();
   }
 
-  Future<void> onUpvote(String aid, uid) async {
+  Future<void> onUpvote(String aid, uid, qid) async {
     try {
       final doc = await fireStore.collection('answers').doc(aid).get();
 
@@ -55,12 +58,13 @@ class AnswerController extends GetxController {
           .doc(aid)
           .update({'upvotes': answer.upvotes});
       box.write('upVoted_${aid}_$uid', true);
+      await getQuesAnswer(qid);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }
   }
 
-  Future<void> unUpvote(String aid, uid) async {
+  Future<void> unUpvote(String aid, uid, qid) async {
     try {
       final doc = await fireStore.collection('answers').doc(aid).get();
 
@@ -74,6 +78,7 @@ class AnswerController extends GetxController {
             .update({'upvotes': answer.upvotes});
       }
       box.write('upVoted_${aid}_$uid', false);
+      await getQuesAnswer(qid);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }
@@ -83,14 +88,14 @@ class AnswerController extends GetxController {
     return box.read('downVoted_${aid}_$uid') == true;
   }
 
-  Future<void> decDownVote(String aid, uid) async {
+  Future<void> decDownVote(String aid, uid, qid) async {
     isDownVoted(aid, uid)
-        ? await unDownVote(aid, uid)
-        : await onDownVote(aid, uid);
+        ? await unDownVote(aid, uid, qid)
+        : await onDownVote(aid, uid, qid);
     update();
   }
 
-  Future<void> onDownVote(String aid, uid) async {
+  Future<void> onDownVote(String aid, uid, qid) async {
     try {
       final doc = await fireStore.collection('answers').doc(aid).get();
       final Answer answer = Answer.fromMap(doc.data()!);
@@ -100,12 +105,13 @@ class AnswerController extends GetxController {
           .doc(aid)
           .update({'downvotes': answer.downvotes});
       box.write('downVoted_${aid}_$uid', true);
+      await getQuesAnswer(qid);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }
   }
 
-  Future<void> unDownVote(String aid, uid) async {
+  Future<void> unDownVote(String aid, uid, qid) async {
     try {
       final doc = await fireStore.collection('answers').doc(aid).get();
       final Answer answer = Answer.fromMap(doc.data()!);
@@ -117,6 +123,7 @@ class AnswerController extends GetxController {
             .update({'downvotes': answer.downvotes});
       }
       box.write('downVoted_${aid}_$uid', false);
+      await getQuesAnswer(qid);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }

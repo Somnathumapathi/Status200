@@ -132,6 +132,7 @@ class QuesDetailsScreen extends StatelessWidget {
                               userid: ans.uid,
                               accountItemController: AccountItemController(),
                               answerController: answerController,
+                              qid: qdqid,
                             );
                           },
                         )

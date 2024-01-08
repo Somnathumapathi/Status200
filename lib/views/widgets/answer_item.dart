@@ -13,6 +13,7 @@ class AnswerItem extends StatelessWidget {
       required this.upvotes,
       required this.downvotes,
       required this.userid,
+      required this.qid,
       required this.accountItemController,
       required this.answerController});
   String aid;
@@ -20,6 +21,7 @@ class AnswerItem extends StatelessWidget {
   int upvotes;
   int downvotes;
   String userid;
+  String qid;
   final AccountItemController accountItemController;
   final AnswerController answerController;
 
@@ -44,10 +46,10 @@ class AnswerItem extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         answerController.decUpVote(
-                            aid, firebaseAuth.currentUser!.uid);
+                            aid, firebaseAuth.currentUser!.uid, qid);
 
                         answerController.unDownVote(
-                            aid, firebaseAuth.currentUser!.uid);
+                            aid, firebaseAuth.currentUser!.uid, qid);
                       },
                       icon: answerController.isUpVoted(
                               aid, firebaseAuth.currentUser!.uid)
@@ -67,10 +69,10 @@ class AnswerItem extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         answerController.decDownVote(
-                            aid, firebaseAuth.currentUser!.uid);
+                            aid, firebaseAuth.currentUser!.uid, qid);
 
                         answerController.unUpvote(
-                            aid, firebaseAuth.currentUser!.uid);
+                            aid, firebaseAuth.currentUser!.uid, qid);
                       },
                       icon: answerController.isDownVoted(
                               aid, firebaseAuth.currentUser!.uid)

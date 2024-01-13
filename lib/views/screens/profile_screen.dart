@@ -140,19 +140,11 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(20.0),
                       child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 10, 56, 12),
-                                foregroundColor: Colors.white,
-                                textStyle: const TextStyle(fontSize: 18)),
-                            onPressed: () {
-                              Get.to(MyQuestionsScreen());
-                            },
-                            child: const Text('Show more'),
+                          child: TextButton(
+                            onPressed: () => Get.to(MyQuestionsScreen()),
+                            child: const Text(
+                            'Show more',
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ),

@@ -32,10 +32,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //String firstLetter = userName.isNotEmpty ? userName[0].toUpperCase() : '';
     return FutureBuilder(
-        future: accountItemController
+        future:          accountItemController
             .getAccountDetails(firebaseAuth.currentUser!.uid),
         builder: (context, snapshot) {
-          return Scaffold(
+                   return Scaffold(
             //backgroundColor: const Color.fromARGB(61, 0, 0, 0),
             body: Center(
               child: Container(
@@ -113,43 +113,53 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 15.0),
                     Expanded(
                       child: FutureBuilder(
-                         future: myQuestionsController.getCurrentUserUid(),
-                          builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (myQuestionsController.questions.isEmpty) {
-                    return const Center(child: Text('No questions to display'));
-                  } else {
-                    return ListView.builder(
-                      itemCount: myQuestionsController.questions.length<3? myQuestionsController.questions.length:3,
-                      itemBuilder: (context, i) {
-                        final _question = myQuestionsController.questions[i];
-                        return InkWell(
-                          onTap: () async {
-                            final AnswerController answerController =
-                                        Get.put(AnswerController());
-                                    await answerController.fetchAnswers();
-                                    Get.to(() => QuesDetailsScreen(
-                                          qdtitle: _question.qtitle,
-                                          qddesc: _question.qdescription,
-                                          qdcat: _question.category,
-                                          qdImage: _question.imageUrl,
-                                          qdqid: _question.qid!,
-                                          qduid: _question.uid,
-                                        ));
-                          },
-                          child: QuestionItem(
-                            qucat: _question.category,
-                            qutitle: _question.qtitle,
-                            qudesc: _question.qdescription,
-                          ),
+                        future:  myQuestionsController.getCurrentUserUid(),
+                        builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          String uid = snapshot.data as String;
+                        return FutureBuilder(
+                           future: myQuestionsController.getMyQuestions(uid),
+                            builder: (context, snapshot) {
+                                        if (snapshot.connectionState == ConnectionState.done) {
+                                          if (myQuestionsController.questions.isEmpty) {
+                                            return const Center(child: Text('No questions to display'));
+                                          } else {
+                                            return ListView.builder(
+                        itemCount: myQuestionsController.questions.length<3? myQuestionsController.questions.length:3,
+                        itemBuilder: (context, i) {
+                          final _question = myQuestionsController.questions[i];
+                          return InkWell(
+                            onTap: () async {
+                              final AnswerController answerController =
+                                          Get.put(AnswerController());
+                                      await answerController.fetchAnswers();
+                                      Get.to(() => QuesDetailsScreen(
+                                            qdtitle: _question.qtitle,
+                                            qddesc: _question.qdescription,
+                                            qdcat: _question.category,
+                                            qdImage: _question.imageUrl,
+                                            qdqid: _question.qid!,
+                                            qduid: _question.uid,
+                                          ));
+                            },
+                            child: QuestionItem(
+                              qucat: _question.category,
+                              qutitle: _question.qtitle,
+                              qudesc: _question.qdescription,
+                            ),
+                          );
+                        },
+                                            );
+                                          }
+                                        } else {
+                                          return const Center(child: CircularProgressIndicator());
+                                        }
+                                      },
                         );
-                      },
-                    );
-                  }
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+                        } else{
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        },
                       )
                     ),
                     Padding(
@@ -170,6 +180,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           );
+        
         });
   }
 }

@@ -47,9 +47,10 @@ class AnswerItem extends StatelessWidget {
                       onPressed: () {
                         answerController.decUpVote(
                             aid, firebaseAuth.currentUser!.uid, qid);
-
-                        answerController.unDownVote(
-                            aid, firebaseAuth.currentUser!.uid, qid);
+                        if (firebaseAuth.currentUser!.uid == userid) {
+                          answerController.unDownVote(
+                              aid, firebaseAuth.currentUser!.uid, qid);
+                        }
                       },
                       icon: answerController.isUpVoted(
                               aid, firebaseAuth.currentUser!.uid)
@@ -70,9 +71,10 @@ class AnswerItem extends StatelessWidget {
                       onPressed: () {
                         answerController.decDownVote(
                             aid, firebaseAuth.currentUser!.uid, qid);
-
-                        answerController.unUpvote(
-                            aid, firebaseAuth.currentUser!.uid, qid);
+                        if (firebaseAuth.currentUser!.uid == userid) {
+                          answerController.unUpvote(
+                              aid, firebaseAuth.currentUser!.uid, qid);
+                        }
                       },
                       icon: answerController.isDownVoted(
                               aid, firebaseAuth.currentUser!.uid)

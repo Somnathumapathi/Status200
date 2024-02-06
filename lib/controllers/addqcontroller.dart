@@ -57,7 +57,7 @@ class AddQuestionController extends GetxController {
       DocumentReference docRef =
           await fireStore.collection('questions').add(question.toQJson());
       await docRef.update({'qid': docRef.id});
-      print(docRef.id);
+      // print(docRef.id);
       Get.snackbar('Successfully', 'Asked Question');
     } catch (e) {
       Get.snackbar('Error', e.toString());

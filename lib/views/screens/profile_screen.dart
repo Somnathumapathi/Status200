@@ -3,11 +3,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status200/controllers/accountitemcontroller.dart';
+import 'package:status200/controllers/answercontroller.dart';
+import 'package:status200/controllers/myquestionscontroller.dart';
 import 'package:status200/views/screens/myquestions_screen.dart';
+import 'package:status200/views/screens/quesdetails_screen.dart';
+import 'package:status200/views/widgets/questionItem.dart';
 
 import '../../constants.dart';
 
 class ProfileScreen extends StatelessWidget {
+  final MyQuestionsController myQuestionsController =
+      Get.put(MyQuestionsController());
   final String userName;
   final Color backgroundColor;
   final Color textColor;
@@ -26,10 +32,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //String firstLetter = userName.isNotEmpty ? userName[0].toUpperCase() : '';
     return FutureBuilder(
-        future: accountItemController
+        future:          accountItemController
             .getAccountDetails(firebaseAuth.currentUser!.uid),
         builder: (context, snapshot) {
-          return Scaffold(
+                   return Scaffold(
             //backgroundColor: const Color.fromARGB(61, 0, 0, 0),
             body: Center(
               child: Container(
@@ -106,53 +112,65 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 15.0),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: ListView(
-                          itemExtent: 70.0,
-                          children:
-                              ListTile.divideTiles(context: context, tiles: [
-                            const ListTile(
-                              title: Text(
-                                  'State True or False “Variable declaration is implicit in Python.”'),
-                              tileColor: Color.fromARGB(130, 1, 0, 0),
+                      child: FutureBuilder(
+                        future:  myQuestionsController.getCurrentUserUid(),
+                        builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          String uid = snapshot.data as String;
+                        return FutureBuilder(
+                           future: myQuestionsController.getMyQuestions(uid),
+                            builder: (context, snapshot) {
+                                        if (snapshot.connectionState == ConnectionState.done) {
+                                          if (myQuestionsController.questions.isEmpty) {
+                                            return const Center(child: Text('No questions to display'));
+                                          } else {
+                                            return ListView.builder(
+                        itemCount: myQuestionsController.questions.length<3? myQuestionsController.questions.length:3,
+                        itemBuilder: (context, i) {
+                          final _question = myQuestionsController.questions[i];
+                          return InkWell(
+                            onTap: () async {
+                              final AnswerController answerController =
+                                          Get.put(AnswerController());
+                                      await answerController.fetchAnswers();
+                                      Get.to(() => QuesDetailsScreen(
+                                            qdtitle: _question.qtitle,
+                                            qddesc: _question.qdescription,
+                                            qdcat: _question.category,
+                                            qdImage: _question.imageUrl,
+                                            qdqid: _question.qid!,
+                                            qduid: _question.uid,
+                                          ));
+                            },
+                            child: QuestionItem(
+                              qucat: _question.category,
+                              qutitle: _question.qtitle,
+                              qudesc: _question.qdescription,
                             ),
-                            const ListTile(
-                              title: Text(
-                                  'State True or False “Variable declaration is implicit in Python."'),
-                              tileColor: Color.fromARGB(130, 1, 0, 0),
-                            ),
-                            const ListTile(
-                              title: Text(
-                                  'State True or False “Variable declaration is implicit in Python.”'),
-                              tileColor: Color.fromARGB(130, 1, 0, 0),
-                            ),
-                            const ListTile(
-                              title: Text(
-                                  'State True or False “Variable declaration is implicit in Python.”'),
-                              tileColor: Color.fromARGB(130, 1, 0, 0),
-                            ),
-                          ]).toList(),
-                        ),
-                      ),
+                          );
+                        },
+                                            );
+                                          }
+                                        } else {
+                                          return const Center(child: CircularProgressIndicator());
+                                        }
+                                      },
+                        );
+                        } else{
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        },
+                      )
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 10, 56, 12),
-                                foregroundColor: Colors.white,
-                                textStyle: const TextStyle(fontSize: 18)),
-                            onPressed: () {
-                              Get.to(MyQuestionsScreen());
-                            },
-                            child: const Text('Show more'),
+                          child: TextButton(
+                            onPressed: () => Get.to(MyQuestionsScreen()),
+                            child: const Text(
+                            'Show more',
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ),
@@ -162,6 +180,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           );
+        
         });
   }
 }
